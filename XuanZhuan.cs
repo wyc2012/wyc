@@ -44,7 +44,7 @@ namespace Algorithm
         {
             reverse(chs, 0, num - 1);
             reverse(chs, num, chs.Length - 1);
-            reverse(chs, 0, chs.Length);
+            reverse(chs, 0, chs.Length - 1);
         }
 
         /// <summary>
@@ -63,6 +63,44 @@ namespace Algorithm
                 chs[end] = tmp;
                 start++;
                 end--;
+            }
+        }
+
+        public static void XuanZhuan3(char[] chs, int len, int num)
+        {
+            int left = len - num;
+            if (left > 0)
+            {
+                if (num > left)
+                {
+                    BlockReverse(chs, len - 2 * left, len - left, left);
+                    XuanZhuan3(chs, len - left, num - left);
+                }
+                else
+                {
+                    BlockReverse(chs, 0, len - num, num);
+                    XuanZhuan3(chs, len - num, num);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 确保两者不交叉
+        /// </summary>
+        /// <param name="chs"></param>
+        /// <param name="start1"></param>
+        /// <param name="start2"></param>
+        /// <param name="len"></param>
+        private static void BlockReverse(char[] chs, int start1, int start2, int len)
+        {
+            char tmp;
+            int i = 0;
+            while (i < len)
+            {
+                tmp = chs[start1 + i];
+                chs[start1 + i] = chs[start2 + i];
+                chs[start2 + i] = tmp;
+                i++;
             }
         }
     }
