@@ -2,7 +2,10 @@
 /*
 产生k个从0到n-1的随机数，高效
 */
-
+2.
+/*
+在第一次访问向量的某一项时进行初始化，而不是在开始的时候全部初始化。
+*/
 
 
 
@@ -15,4 +18,22 @@ for(int j = 0; j < k; ++j)
 {
   swap(i, randint(i, n-1));
   print x[i];
+}
+
+/*2*/
+Entry data[NUM];
+unsigned char from[NUM];
+unsigned char to[NUM];
+int top = 0;
+//访问第i项
+if(from[i] < top && to[from[i]] == i)//已经初始化
+{
+  //正常的访问操作
+}
+else//还没初始化
+{
+  from[i] = top;
+  to[top] = i;
+  Init(data[i]);//data[i]的初始化
+  top++;
 }
