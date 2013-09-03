@@ -6,7 +6,10 @@
 /*
 在第一次访问向量的某一项时进行初始化，而不是在开始的时候全部初始化。
 */
-
+3.
+/*
+旋转数组abcdefgh  rotate(3, 8)后为defghabc
+*/
 
 
 
@@ -36,4 +39,35 @@ else//还没初始化
   to[top] = i;
   Init(data[i]);//data[i]的初始化
   top++;
+}
+
+/*3*/
+//(1)只占用一个额外空间并且，把每一项移动对应的位置。最重要的是每一项只移动了一次。
+//最大公约数的效果：为了移动所有的元素，最大公约数会行程循环。
+void rotate(int size, int n)
+{
+  for(int i = 0; i < gcd(size, n); ++i)
+  {
+    int t = x[i];
+    j = i;
+    
+    while(1)
+    {
+      k = j + size;
+      if( k >= n)
+        k -= n;
+      if(k == i)
+        break;
+      x[j] = x[k];
+      j = k;
+    }
+    x[j] = t;
+  }
+}
+//(2)经典的方法。
+void rotate(int size, int n)
+{
+  reverse(0, size - 1);
+  reverse(size, n - 1);
+  reverse(0, n - 1);
 }
