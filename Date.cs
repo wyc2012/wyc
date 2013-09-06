@@ -73,7 +73,7 @@ namespace Algorithm
         }
 
         /// <summary>
-        /// 判断是否是闰年
+        /// 判断是否是闰年；不能被100整除但能被4整除+能被400整除。
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
