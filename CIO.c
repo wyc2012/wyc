@@ -3,6 +3,7 @@ int main()
     //\n换行(newline)-10;\r回车(return)-13 linux下是没有\r的。
     //scanf在进行格式化输入时，不像printf按格式化字符串并把format中的空格等进行输出。scanf主要是根据%s %c %d等进行解析输入
     //不太考虑format中的其它字符。比如"%s%s"和"%s %s"和"%s\n%s"都一样的接收"aaa bbb"的输入并解析成两个字符串aaa和bbb
+    //http://blog.csdn.net/liliangbao/article/details/4088386有讲解
     /*
     读取字符测试：
     (1)scanf以回车触发一次输入。不以空格，回车，Tab分割。中间的空格，回车，Tab都当成字符输入不会舍弃。
