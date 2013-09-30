@@ -1,3 +1,4 @@
+/*
 http://www.cppblog.com/oosky/archive/2006/07/06/9486.html
 各种情况如下：
 （1）next[0]= -1  意义：任何串的第一个字符的模式值规定为-1。
@@ -12,6 +13,7 @@ T[j-k]T[j-k+1]T[j-k+2]…T[j-1]
 且T[j] != T[k].（1≤k<j）;
 (4) next[j]=0   意义：除（1）（2）（3）的其他情况。
 
+*/
 //展开版函数
 void next_set(char* T, int next[], int len)
 {
@@ -67,6 +69,7 @@ void next_set(char* T, int next[], int len)
   }
 }
 
+//http://blog.csdn.net/yaochunnian/article/details/7059486
 int kmp_search(char const* src, int slen, char const* patn, int plen, int const* nextval, int pos)
 {
   int i = pos;
