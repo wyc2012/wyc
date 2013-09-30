@@ -10,6 +10,10 @@
 /*
 旋转数组abcdefgh  rotate(3, 8)后为defghabc
 */
+4.
+/*
+如何在程序中使用哨兵来找出数组中的最大元素。
+*/
 
 
 
@@ -70,4 +74,16 @@ void rotate(int size, int n)
   reverse(0, size - 1);
   reverse(size, n - 1);
   reverse(0, n - 1);
+}
+
+
+/*4*/
+i = 0;
+while(i < n)
+{
+  max = x[i];
+  x[n] = max;
+  ++i;
+  while(x[i] < max)//此处不用管i要比n小的判断
+    ++i;
 }
