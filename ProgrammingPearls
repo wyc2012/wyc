@@ -14,6 +14,10 @@
 /*
 如何在程序中使用哨兵来找出数组中的最大元素。
 */
+5.
+/*
+随机数生成
+*/
 
 
 
@@ -87,3 +91,85 @@ while(i < n)
   while(x[i] < max)//此处不用管i要比n小的判断
     ++i;
 }
+
+/*5  从0到n-1个数中选取m个随机的数，并且排序输出*/
+//(1)
+void genknuth(int m, int n)
+{
+  for(int i = 0; i < n; ++i)
+  {
+    if((bigrand() % (n - i)) < m)
+    {
+      cout << i << "\n";
+      --m;
+    }
+  }
+}
+
+//(2)
+void genshuf(int m, int n)
+{
+  int i, j;
+  int* x = new int[n];
+  for(i = 0; i < n; ++i)
+    x[i] = i;
+  for(i = 0; i < m; ++i)
+  {
+    j = randint(i, n-1);
+    int t = x[i];
+    x[i] = x[j];
+    x[j] = t;
+  }
+  sort(x, x+m);
+  for(i = 0; i < m; ++i)
+    cout << x[i] << "\n";
+}
+
+//(3)
+void gensets(int m, int n)
+{
+  set<int> S;
+  while(S.size() < m)
+  {
+    S.insert(bigrand() % n);//相同的元素算一个。
+  }
+  //排序后依次输出S。
+}
+
+//（3）的改进 Floyd抽样算法
+void genfloyd(int m, int n)
+{
+  set<int> S;
+  for(int j = n - m; j < n; ++j)
+  {
+    int t = bigrand() % (j + 1);
+    if(!S.find(t))
+      S.insert(t);
+    else
+      S.insert(j);
+  }
+  //排序依次输出S
+}
+//（3）是一下递归方程的迭代实现
+//Floyd算法的结构可以理解：为了从1…10当中产生一个5元素样本，首先从1…9当中产生一个4元素样本，然后加上第5个元素。这个递归算法概述为F1.
+function Sample(M, N)
+	if M = 0 then
+		return the empty set
+	else
+		S:= Samle(M-1, N-1)
+		T:= RandInt(1, N)
+		if T is not in S then
+			insert T in S
+		else 
+			intsert N in S
+		return S
+证明Floyd算法的正确性：
+Floyd算法的结构很容易递归的理解：为了从1..10中产生一个5元素样本，首先从1..9中产生一个4元素样本，然后在加上第5个元素。
+
+用归纳法证明每个元素被取到的概率是一样的。
+
+当M=1时，显然成立。假设Sample(M-1,N-1)成立，即1..N-1被取到的概率都是M-1/N-1。
+
+那么在Sample(M,N)中，N被取到的概率为1/N+M-1/N=M/N.（T=RandInt(1,N),T为N的概率是1/N，T不为N但是已经被选过，即T是N个数里面选M-1个数的概率，等于M-1/N）
+
+对于1..N-1中的任意数一个数，在Sample(M,N)中被取到的概率是M-1/N-1+(1-M-1/N-1)/N=M/N.（在Sample(M-1,N-1)被取到M-1/N-1，没被取到记为A=1-（M-1/N-1），在T=RandInt(1,N)里面取到的概率为1/N，所以总概率为M-1/N-1 + A*1/N=M/N）证毕
