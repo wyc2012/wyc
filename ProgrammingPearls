@@ -68,10 +68,11 @@ void rotate(int size, int n)
         k -= n;
       if(k == i)
         break;
-      x[j] = x[k];
+      t = x[k];
+      x[k] = x[j];
       j = k;
     }
-    x[j] = t;
+    x[k] = t;
   }
 }
 //(2)经典的方法。
